@@ -14,10 +14,61 @@ constants:
   START_DATE: "2018-01-01" # actuals sim data start
   END_DATE: "2020-09-30" # actuals sim data end
   WORK_WEEKENDS: FALSE # will remove volumes on weekends (Sat, Sun)
+  WEEKEND_DAYS:
+    - Saturday
+    - Sunday
   MIN_NUM_TASKS_PER_DAY: 0 # min for number of times a task is done per day
   MAX_NUM_TASKS_PER_DAY: 100  # max for number of times a task is done per day
   MIN_TASKS_PER_TEAM: 10 # min for number of tasks per team
   MAX_TASKS_PER_TEAM: 25 # max for number of tasks per team
   DO_FC: FALSE # set to TRUE to run the forecasts (takes a while)
   FC_HORIZON: "3 months"
+
+team_names:
+  adjectives:
+    - "Fiery"
+    - "Fighting"
+    - "Speedy"
+    - "Bronze"
+    - "Gold"
+    - "Silver"
+    - "Angry"
+  mascots:
+    - "Dragons"
+    - "Bulldogs"
+    - "Champions"
+    - "Puppydogs"
+    - "Pussycats"
+    - "Panthers"
+    - "Tigers"
+
+task_names:
+  verbs:
+    - "Cutting"
+    - "Drawing"
+    - "Folding"
+    - "Mending"
+    - "Filing"
+    - "Counting"
+    - "Emailing"
+    - "Cleaning"
+  adjectives:
+    - "Green"
+    - "Blue"
+    - "Red"
+    - "Brown"
+    - "Gold"
+    - "Silver"
+    - "Large"
+    - "Small"
+    - "Simple"
+    - "Complex"
+  nouns:
+    - "Documents"
+    - "Files"
+    - "Folders"
+    - "Papers"
+    - "Staples"
+    - "Spreadsheets"
+    - "Desktops"
 

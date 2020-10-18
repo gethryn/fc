@@ -35,6 +35,7 @@ DAYS = seq(from=START_DATE, to=END_DATE, by = "day")
 
 # remove volume from Sat and Sun if FALSE, work all days when TRUE
 WORK_WEEKENDS = .config$constants$WORK_WEEKENDS %||% FALSE
+WEEKEND_DAYS = .config$constants$WEEKEND_DAYS %||% c("Saturday","Sunday")
 
 # when simulating task counts per day, use a uniform prediction in this range 
 MIN_NUM_TASKS_PER_DAY = .config$constants$MIN_NUM_TASKS_PER_DAY %||% 0
@@ -55,8 +56,8 @@ FC_HORIZON = .config$constants$FC_HORIZON %||% "3 months"
 generate_teams <- function(num_teams=NUM_TEAMS, 
                            min_tasks=MIN_TASKS_PER_TEAM, max_tasks=MAX_TASKS_PER_TEAM) {
   tasks_per_team = round(runif(num_teams, min_tasks,max_tasks))
-  adjectives <- c("Fiery","Fighting","Speedy","Bronze","Gold","Silver","Angry")
-  mascots <- c("Dragons", "Bulldogs", "Champions", "Puppydogs", "Pussycats", "Panthers", "Tigers")
+  adjectives <- .config$team_names$adjectives %||% c("Big")
+  mascots <- .config$team_names$mascots %||% c("Dragons")
   team_names <- crossing(adjectives, mascots) %>% 
     mutate(name = toupper(paste(adjectives, mascots, "Team"))) %>% 
     select(name)
@@ -69,17 +70,15 @@ generate_teams <- function(num_teams=NUM_TEAMS,
 generate_tasks <- function(num_tasks, 
                                     min_tasks = MIN_NUM_TASKS_PER_DAY, 
                                     max_tasks = MAX_NUM_TASKS_PER_DAY) {
-  verbs <- c("Cutting","Drawing","Folding","Mending","Filing","Counting","Emailing","Cleaning")
-  adjectives <- c("Green","Blue","Red","Brown","Gold","Silver","Large","Small","Simple","Complex")
-  nouns <- c("Documents","Files","Folders","Papers","Staples","Spreadsheets","Desktops")
+  verbs <- .config$task_names$verbs %||% c("Cleaning")
+  adjectives <- .config$task_names$adjectives %||% c("Complex")
+  nouns <-.config$task_names$nouns %||%  c("Documents")
   task_names <- crossing(verbs, adjectives, nouns) %>% 
     mutate(name = paste(verbs, adjectives, nouns)) %>% 
     select(name)
   out <- tibble(task=sample(task_names$name, num_tasks, replace=FALSE),
                 base_vol=round(runif(num_tasks, min_tasks, max_tasks)),
-                std_time=round(runif(num_tasks)*30)*15) %>%
-    mutate(workload = base_vol * std_time,
-           workload_hrs = round(workload / 3600,2))
+                std_time=round(runif(num_tasks)*30)*15) 
   out
 }
 
@@ -89,7 +88,7 @@ generate_task_data <- function(base_value, days=DAYS, we=WORK_WEEKENDS) {
   n = length(DAYS)
   data = rpois(n, base_value)
   out = tibble(date=DAYS, volume=data)
-  if (!we) { out$volume[weekdays(DAYS) %in% c("Saturday","Sunday")] <- 0 }
+  if (!we) { out$volume[weekdays(DAYS) %in% WEEKEND_DAYS] <- 0 }
   out
 }
 
