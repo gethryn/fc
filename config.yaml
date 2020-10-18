@@ -1,0 +1,23 @@
+packages:
+  - lubridate
+  - dplyr
+  - tidyr
+  - tsibble
+  - fable
+  - forcats
+  - broom
+  - ggplot2
+  - purrr
+  
+constants:
+  NUM_TEAMS: 3 # the number of teams to simulate
+  START_DATE: "2018-01-01" # actuals sim data start
+  END_DATE: "2020-09-30" # actuals sim data end
+  WORK_WEEKENDS: FALSE # will remove volumes on weekends (Sat, Sun)
+  MIN_NUM_TASKS_PER_DAY: 0 # min for number of times a task is done per day
+  MAX_NUM_TASKS_PER_DAY: 100  # max for number of times a task is done per day
+  MIN_TASKS_PER_TEAM: 10 # min for number of tasks per team
+  MAX_TASKS_PER_TEAM: 25 # max for number of tasks per team
+  DO_FC: FALSE # set to TRUE to run the forecasts (takes a while)
+  FC_HORIZON: "3 months"
+
