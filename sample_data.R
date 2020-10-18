@@ -10,7 +10,7 @@
 
 # -[TODO]-----------------------------------------------------------------------------------------------------
 # 1: better way to simulate task data so it is seasonal, has trend, possibly
-#    simulate arima data or something like that?
+#    simulate ARIMA data or something like that?
 # 2: use purrr to generate data functionally  √
 
 # -[GET CONFIG.YAML]------------------------------------------------------------------------------------------
