@@ -12,6 +12,7 @@
 # 1: better way to simulate task data so it is seasonal, has trend, possibly
 #    simulate ARIMA data or something like that?
 # 2: use purrr to generate data functionally  √
+# 3: weekend data should be NA not 0 if not working; add na.rm's everywhere.
 
 # -[GET CONFIG.YAML]------------------------------------------------------------------------------------------
 require(yaml); .config <- yaml::read_yaml("config.yaml")
