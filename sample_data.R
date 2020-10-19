@@ -128,6 +128,10 @@ generate_all <- function(num_teams=NUM_TEAMS, min_tasks=MIN_TASKS_PER_TEAM,
 # to monthly (-> dat_monthly).
 dat <- generate_all() 
 
+dat_nested <- dat %>% 
+  group_by(team, task) %>% 
+  nest()
+
 dat_weekly <- dat %>%
   group_by_key() %>%
   index_by(week_num = ~ week(.)) %>% # weekly aggregates
