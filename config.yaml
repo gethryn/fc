@@ -17,6 +17,7 @@ constants:
   WEEKEND_DAYS:
     - Saturday
     - Sunday
+  WEEKEND_REPLACE:  # blank for NA
   MIN_NUM_TASKS_PER_DAY: 0 # min for number of times a task is done per day
   MAX_NUM_TASKS_PER_DAY: 100  # max for number of times a task is done per day
   MIN_TASKS_PER_TEAM: 10 # min for number of tasks per team
