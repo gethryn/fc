@@ -173,10 +173,14 @@ apply_team_task_prop <- function(dat, tm, new_hours) {
 }
 
 # example call
+dat <- generate_all() 
 new_workload <- 400
+tm <- as.character(dat$team[[1]])
 avg_team_task_props <- get_team_task_prop(dat, summary=TRUE)
-new_data <- apply_team_task_prop(avg_team_task_props, "ANGRY CHAMPIONS TEAM", new_workload)
-sum(new_data$new_task_workload) # [1] 400.0667 for 400 input 
+new_data <- apply_team_task_prop(avg_team_task_props, tm, new_workload)
+sum(new_data$new_task_workload) # should be close to "new_workload"
+new_data %>%
+  select(team, task, volume=new_task_volume, workload=new_task_workload, std_time)
 
 
 
